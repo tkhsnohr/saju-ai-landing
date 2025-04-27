@@ -2,6 +2,7 @@
 import { createClient } from '@supabase/supabase-js'
 
 useHead({
+  title: '사주AI - 나를 아는 AI 친구',
   script: [{
     innerHTML: `!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -69,6 +70,25 @@ const submitEmail = async () => {
         <p class="subtitle">매일 쌓이는 작은 고민들, 내 사주 기반 AI가 대신 답해줄게요.</p>
       </section>
 
+      <section class="signup">
+        <h2>곧 출시됩니다!</h2>
+        <p>출시 소식을 가장 먼저 받아보세요.</p>
+
+        <div class="form-container" v-if="!submitted">
+          <form @submit.prevent="submitEmail" class="email-form">
+            <input type="email" v-model="email" placeholder="이메일 주소를 입력하세요" required />
+            <button type="submit" :disabled="loading">
+              {{ loading ? '처리 중...' : '알림 받기' }}
+            </button>
+          </form>
+          <p class="error" v-if="errorMessage">{{ errorMessage }}</p>
+        </div>
+
+        <div class="success-message" v-else>
+          <p>감사합니다! 출시 소식을 이메일로 알려드리겠습니다.</p>
+        </div>
+      </section>
+
       <section class="features">
         <div class="feature-card">
           <h3>매일매일, 나만을 위한 소름 돋는 조언</h3>
@@ -92,25 +112,6 @@ const submitEmail = async () => {
 
         <div class="feature-card">
           <h3>나보다 나를 더 잘 아는 친구, 지금 만나보세요.</h3>
-        </div>
-      </section>
-
-      <section class="signup">
-        <h2>곧 출시됩니다!</h2>
-        <p>출시 소식을 가장 먼저 받아보세요.</p>
-
-        <div class="form-container" v-if="!submitted">
-          <form @submit.prevent="submitEmail" class="email-form">
-            <input type="email" v-model="email" placeholder="이메일 주소를 입력하세요" required />
-            <button type="submit" :disabled="loading">
-              {{ loading ? '처리 중...' : '알림 받기' }}
-            </button>
-          </form>
-          <p class="error" v-if="errorMessage">{{ errorMessage }}</p>
-        </div>
-
-        <div class="success-message" v-else>
-          <p>감사합니다! 출시 소식을 이메일로 알려드리겠습니다.</p>
         </div>
       </section>
     </main>
